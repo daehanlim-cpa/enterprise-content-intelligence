@@ -1,0 +1,30 @@
+source:
+  type: youtube
+  max_items_per_run: 10
+  languages:
+    - en
+
+preprocessing:
+  normalize_whitespace: true
+  lowercase: true
+  remove_timestamps: true
+  detect_language: true
+
+chunking:
+  strategies:
+    - name: fixed
+      chunk_size: 500
+      overlap: 50
+    - name: sliding_window
+      window_size: 300
+      stride: 150
+
+storage:
+  layers:
+    raw: raw_content
+    processed: processed_content
+    chunked: chunked_content
+
+metrics:
+  capture_latency: true
+  capture_completeness: true
